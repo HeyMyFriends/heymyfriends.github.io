@@ -188,3 +188,31 @@ a.image-preview-link {
   cursor: pointer;
   padding: 0;
 }
+
+p.collapsible-abstract {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  margin-bottom: 6px;
+}
+
+p.collapsible-abstract.is-expanded {
+  display: block;
+  -webkit-line-clamp: unset;
+}
+
+.abstract-toggle {
+  border: 0;
+  background: transparent;
+  color: #1772d0;
+  cursor: pointer;
+  padding: 0;
+  font-family: 'Lato', Verdana, Helvetica, sans-serif;
+  font-size: 13px;
+}
+
+.abstract-toggle:hover,
+.abstract-toggle:focus {
+  color: #f09228;
+}
