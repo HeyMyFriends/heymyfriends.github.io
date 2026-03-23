@@ -228,3 +228,7 @@ p.collapsible-abstract.is-expanded {
   height: 100%;
   border: 0;
 }
+
+.paper-extra-links {
+  margin-top: 1em;
+}
