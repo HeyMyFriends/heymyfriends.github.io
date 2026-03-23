@@ -93,6 +93,7 @@
 											Scenes with the World in Miniature Paradigm
 										</span>
 									</a>
+									<a href="#" class="youtube-open-link" data-video-id="VIDEO_ID">Video</a>
 									<br>
 									<span style="font-family:Oxanium;font-weight:bold;color:#027dff">Xuyu Li</span>,
 									<span style="font-family:Oxanium;color:#666666">John Dingliana</span>.
@@ -108,9 +109,6 @@
 										details for such a system, along with insights that motivate promising
 										directions for future work.
 									</p>
-									<div style="margin-top:12px;">
-										<button type="button" class="youtube-open-btn" data-video-id="VIDEO_ID">Video</button>
-									</div>
 								</td>
 							</tr>
 
@@ -527,7 +525,7 @@
 			var videoLightbox = document.getElementById('video-lightbox');
 			var videoContent = document.getElementById('video-lightbox-content');
 			var videoCloseBtn = videoLightbox.querySelector('.image-lightbox__close');
-			var videoButtons = document.querySelectorAll('button.youtube-open-btn');
+			var videoLinks = document.querySelectorAll('a.youtube-open-link');
 
 			function closeLightbox() {
 				lightbox.classList.remove('is-open');
@@ -588,9 +586,10 @@
 				}
 			});
 
-			videoButtons.forEach(function (button) {
-				button.addEventListener('click', function () {
-					var videoId = button.getAttribute('data-video-id');
+			videoLinks.forEach(function (link) {
+				link.addEventListener('click', function (event) {
+					event.preventDefault();
+					var videoId = link.getAttribute('data-video-id');
 					var iframe = document.createElement('iframe');
 					iframe.setAttribute('src', 'https://www.youtube.com/embed/' + videoId + '?autoplay=1');
 					iframe.setAttribute('title', 'YouTube video player');
