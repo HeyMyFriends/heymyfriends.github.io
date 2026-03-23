@@ -109,7 +109,9 @@
 										directions for future work.
 									</p>
 									<div style="margin-top:12px;">
-										<iframe width="100%" height="315" src="https://www.youtube.com/embed/VIDEO_ID" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+										<div class="youtube-placeholder" data-video-id="VIDEO_ID">
+											<button type="button" class="youtube-play-btn" aria-label="Play video"></button>
+										</div>
 									</div>
 								</td>
 							</tr>
@@ -568,6 +570,24 @@
 				if (abstract.scrollHeight <= abstract.clientHeight + 1) {
 					toggleBtn.style.display = 'none';
 				}
+			});
+
+			var youtubeContainers = document.querySelectorAll('.youtube-placeholder');
+			youtubeContainers.forEach(function (container) {
+				var playBtn = container.querySelector('.youtube-play-btn');
+				var videoId = container.getAttribute('data-video-id');
+
+				playBtn.addEventListener('click', function () {
+					var iframe = document.createElement('iframe');
+					iframe.setAttribute('src', 'https://www.youtube.com/embed/' + videoId + '?autoplay=1');
+					iframe.setAttribute('title', 'YouTube video player');
+					iframe.setAttribute('frameborder', '0');
+					iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+					iframe.setAttribute('allowfullscreen', '');
+
+					container.innerHTML = '';
+					container.appendChild(iframe);
+				});
 			});
 		})();
 	</script>
