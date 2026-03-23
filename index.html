@@ -81,12 +81,9 @@
 
 							<tr>
 								<td style="padding:20px;width:38%;vertical-align:top">
-									<a class="image-preview-link" href="images/papers/saposters25.jpg">
+									<a class="image-preview-link" href="images/papers/saposters25.jpg" data-video-id="VIDEO_ID">
 										<img src='images/papers/saposters25.jpg' width=100%>
 									</a>
-									<div class="paper-extra-links">
-										<a href="#" class="youtube-open-link" data-video-id="VIDEO_ID">[Video]</a>
-									</div>
 									</div>
 								</td>
 								<td style="padding:20px;width:62%;vertical-align:top">
@@ -527,7 +524,6 @@
 			var videoLightbox = document.getElementById('video-lightbox');
 			var videoContent = document.getElementById('video-lightbox-content');
 			var videoCloseBtn = videoLightbox.querySelector('.image-lightbox__close');
-			var videoLinks = document.querySelectorAll('a.youtube-open-link');
 
 			function closeLightbox() {
 				lightbox.classList.remove('is-open');
@@ -544,6 +540,21 @@
 			links.forEach(function (link) {
 				link.addEventListener('click', function (event) {
 					event.preventDefault();
+					var videoId = link.getAttribute('data-video-id');
+					if (videoId) {
+						var iframe = document.createElement('iframe');
+						iframe.setAttribute('src', 'https://www.youtube.com/embed/' + videoId + '?autoplay=1');
+						iframe.setAttribute('title', 'YouTube video player');
+						iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+						iframe.setAttribute('allowfullscreen', '');
+
+						videoContent.innerHTML = '';
+						videoContent.appendChild(iframe);
+						videoLightbox.classList.add('is-open');
+						videoLightbox.setAttribute('aria-hidden', 'false');
+						return;
+					}
+
 					lightboxImg.src = link.getAttribute('href');
 					lightbox.classList.add('is-open');
 					lightbox.setAttribute('aria-hidden', 'false');
@@ -586,23 +597,6 @@
 				if (abstract.scrollHeight <= abstract.clientHeight + 1) {
 					toggleBtn.style.display = 'none';
 				}
-			});
-
-			videoLinks.forEach(function (link) {
-				link.addEventListener('click', function (event) {
-					event.preventDefault();
-					var videoId = link.getAttribute('data-video-id');
-					var iframe = document.createElement('iframe');
-					iframe.setAttribute('src', 'https://www.youtube.com/embed/' + videoId + '?autoplay=1');
-					iframe.setAttribute('title', 'YouTube video player');
-					iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
-					iframe.setAttribute('allowfullscreen', '');
-
-					videoContent.innerHTML = '';
-					videoContent.appendChild(iframe);
-					videoLightbox.classList.add('is-open');
-					videoLightbox.setAttribute('aria-hidden', 'false');
-				});
 			});
 
 			videoCloseBtn.addEventListener('click', closeVideoLightbox);
